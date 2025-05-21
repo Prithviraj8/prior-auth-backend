@@ -14,7 +14,7 @@ auth_request_service = AuthRequestService()
 logger = logging.getLogger(__name__)
 
 # Fixed UUID for service role user
-SERVICE_ROLE_USER_ID = "00000000-0000-0000-0000-000000000001"
+SERVICE_ROLE_USER_ID = "e9d0682e-d6b4-41f2-ac38-514a0881264c"
 
 async def get_current_user(authorization: Optional[str] = Header(None)):
     if not authorization or not authorization.startswith("Bearer "):

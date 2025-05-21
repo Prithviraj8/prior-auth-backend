@@ -9,7 +9,7 @@ from ..database.session import supabase
 logger = logging.getLogger(__name__)
 
 # Fixed UUID for service role user
-SERVICE_ROLE_USER_ID = "00000000-0000-0000-0000-000000000001"
+SERVICE_ROLE_USER_ID = "e9d0682e-d6b4-41f2-ac38-514a0881264c"
 
 class AuthRequestService:
     def create_auth_request(self, request: AuthRequestCreate, user: dict) -> AuthRequestResponse:
