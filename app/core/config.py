@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from typing import List
 import os
 from dotenv import load_dotenv
@@ -8,6 +8,9 @@ import logging
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
+
+# Set Supabase client logging to DEBUG
+logging.getLogger("supabase").setLevel(logging.DEBUG)
 
 load_dotenv()
 

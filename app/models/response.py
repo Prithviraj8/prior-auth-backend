@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Dict
+from typing import Optional, Dict, Union
 
 
 class FieldData(BaseModel):
@@ -15,4 +15,4 @@ class FormExtractionResponse(BaseModel):
     diagnosis_info: Dict[str, FieldData]
     medical_justification: FieldData
     insurance_info: Dict[str, FieldData]
-    processing_metadata: Dict[str, str]
+    processing_metadata: Dict[str, Union[str, int]]
