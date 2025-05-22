@@ -16,3 +16,4 @@ pytest-asyncio>=0.18.0
 sqlalchemy==2.0.41
 psycopg2-binary==2.9.10
 PyJWT
+supabase==1.17.0
