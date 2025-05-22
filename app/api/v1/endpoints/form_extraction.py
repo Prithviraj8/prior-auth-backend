@@ -59,7 +59,5 @@ async def extract_form_data(
         # Map to response
         return response_mapper.map_to_response(ai_response)
 
-    except HTTPException as he:
-        raise he
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing files: {str(e)}")
