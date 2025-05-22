@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.endpoints import form_extraction, auth_requests
 from app.core.config import settings
+from starlette.requests import Request
 
 app = FastAPI(
     title="Prior Auth Copilot API",
@@ -21,6 +22,12 @@ app.add_middleware(
 # Include routers
 app.include_router(form_extraction.router, prefix="/api/v1", tags=["form-extraction"])
 app.include_router(auth_requests.router, prefix="/api/v1/auth-requests", tags=["authorization-requests"])
+
+@app.middleware("http")
+async def log_headers(request: Request, call_next):
+    print("Incoming headers:", dict(request.headers))
+    response = await call_next(request)
+    return response
 
 if __name__ == "__main__":
     import uvicorn
