@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from openai import OpenAI
+import openai
 from app.core.config import settings
 from app.services.interfaces import AIModelProcessor
 from app.models.response import FormExtractionResponse, FieldData
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class GPTVisionProcessor(AIModelProcessor):
     def __init__(self):
-        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        openai.api_key = settings.OPENAI_API_KEY
         self.model = "gpt-4.1"
 
     def _create_system_message(self) -> str:
@@ -83,7 +83,7 @@ class GPTVisionProcessor(AIModelProcessor):
                     )
 
             # Call GPT-4 Vision API with exact message structure
-            openai_response = self.client.chat.completions.create(
+            openai_response = openai.ChatCompletion.create(
                 model=self.model,
                 messages=[{"role": "user", "content": message_content}],
                 max_tokens=4000,

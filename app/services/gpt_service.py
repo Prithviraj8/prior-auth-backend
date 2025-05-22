@@ -1,11 +1,11 @@
 from fastapi import UploadFile
 from typing import List, Dict
 import base64
-from openai import OpenAI
+import openai
 from app.core.config import settings
 from app.models.response import FormExtractionResponse, FieldData
 
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
+openai.api_key = settings.OPENAI_API_KEY
 
 
 async def encode_image_to_base64(file: UploadFile) -> str:
@@ -44,7 +44,7 @@ async def process_files_with_gpt(
 
     try:
         # Call GPT-4 Vision API
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4-vision-preview",
             messages=[
                 {"role": "system", "content": system_message},
