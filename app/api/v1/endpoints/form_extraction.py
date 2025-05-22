@@ -5,6 +5,8 @@ from app.services.file_handler import ImageFileHandler
 from app.services.gpt_processor import GPTVisionProcessor
 from app.services.response_mapper import GPTResponseMapper
 from app.services.interfaces import FileHandler, AIModelProcessor, ResponseMapper
+from fastapi.responses import JSONResponse
+import traceback
 
 router = APIRouter()
 
@@ -60,4 +62,10 @@ async def extract_form_data(
         return response_mapper.map_to_response(ai_response)
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing files: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+        )
